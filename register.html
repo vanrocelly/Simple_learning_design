@@ -1,0 +1,171 @@
+<html>
+<head>
+	<title>KANTIN KEJUJURAN</title>
+</head>
+
+<link rel="stylesheet" type="text/css" href="navigation.css">
+<style type="text/css">
+
+.center{
+	margin-left: 30%;
+}
+
+textarea{
+	height: 50px;
+	width: 175px;
+
+}
+
+span{
+	color: red;
+}
+
+form{
+	margin-top: 100px;
+	margin-left: 150px;
+}
+
+.form-a{
+	width: 200px;
+}	
+
+</style>
+
+<body>
+<a href="Homepage1.html">Kantin Kejujuran</a>
+<a href="Homepage2.html">Home</a>
+<a href="shop.html">Shop</a>
+<a href="register.html" id="Home">Register</a>
+<div class="submenu" id="submenu-b">Login
+<ul id="sub">
+<li>Username <input type="text" placeholder="" name="" id=""></li>
+<li>Password <input type="password" placeholder="" name="" id="	"> <input type="button" value="Login" id="button"></li>
+</ul>
+</div><hr>
+
+<div class="center">
+	
+<form>
+	<h1>Registration</h1>
+	Username:<input type="text" placeholder="" name="txtUsername" id="txtUsername" class="form-a"><span id="usernameStatus" name="usernameStatus"></span><br><br>
+
+	Password:&nbsp<input type="password" placeholder="" name="txtPassword" id="txtPassword"class="form-a"><span id="passwordStatus" name="passwordStatus"></span><br><br>
+
+	Email:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="email" placeholder="" name="txtEmail" id="txtEmail"class="form-a"><span id="emailStatus" name="emailStatus"></span><br><br>
+
+	Address:&nbsp&nbsp&nbsp<textarea name="txtAddress" id="txtAddress"class="form-a"></textarea><span id="addressStatus" name="addressStatus"></span><br><br>
+
+	Phone:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="tel" name="txtPhone" id="txtPhone" class="form-a"><span id="phoneStatus" name="phoneStatus"></span> <br><br>
+
+	Gender	:<input type="radio" name="gender" id="rdbMale" > Male <input type="radio" name="gender" id="rdbFemale"> Female <span id="genderStatus" name="genderStatus"></span><br><br>
+
+	<input type="button" value="Register" onclick="validasi()" id="button1">
+</form>
+</div>
+<div id="footer">&copy Copyright@2015<hr></div>
+
+</body>
+
+<script type="text/javascript">
+
+function validasi()
+{
+	var username = document.getElementById('txtUsername').value;
+	var password = document.getElementById('txtPassword').value;
+	var email = document.getElementById('txtEmail').value;
+	var address = document.getElementById('txtAddress').value;
+	var phone = document.getElementById('txtPhone').value;
+	var male = document.getElementById('rdbMale').checked;
+	var female = document.getElementById('rdbFemale').checked;
+
+	var error = false;
+
+
+	if(username.length<5){
+		console.log(username.length);
+		console.log(email);
+		document.getElementById('usernameStatus').innerHTML = "Harap masukkan username minimal 5 karakter";
+		error = true;
+	}
+	else{
+		document.getElementById('usernameStatus').innerHTML="";
+	}
+
+	var tempangka=0; temphuruf=0;
+	var huruf1="ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	var huruf2="abcdefghijklmnopqrstuvwxyz"
+
+	for(var i=0;i<password.length;i++){
+		for(var j=0;j<=huruf1.length;j++){
+			if(password.charAt(i)==huruf1.charAt(j) || password.charAt(i)==huruf2.charAt(j)){
+				temphuruf++;
+			}				
+		}
+		if(password.charAt(i)=='0' || password.charAt(i)=='1' || password.charAt(i)=='2' || password.charAt(i)=='3' || password.charAt(i)=='5' || password.charAt(i)=='4' || password.charAt(i)=='6' || password.charAt(i)=='7'|| password.charAt(i)=='8'|| password.charAt(i)=='9'){
+			tempangka++;
+		}
+	}
+
+	if(tempangka==password.length || temphuruf==password.length){
+		document.getElementById('passwordStatus').innerHTML="Harap isi dengan alpha numerik";
+		error=true;
+	}
+	else{
+		document.getElementById('passwordStatus').innerHTML="";
+	}
+
+	var temp=0;
+	for(var i=0;i<email.length;i++){
+		if(email.charAt(i)=='@'){
+			temp++;
+		}
+	}
+	if(email.charAt(0)=='@' || email.charAt(email.length-1)=='@'){
+		temp=2;
+	}
+	if (email.charAt(email.length-1)!='m'||email.charAt(email.length-2)!='o'||email.charAt(email.length-3)!='c'){
+		temp=2;
+	}
+	if(email="" || temp!=1){
+		document.getElementById('emailStatus').innerHTML="Harap mengisi email dengan benar"; error=true;
+	}
+	else{
+		document.getElementById('emailStatus').innerHTML="";
+	}
+
+	if(address.indexOf("jalan")==-1 && address.indexOf("Jalan")==-1){
+           document.getElementById('addressStatus').innerHTML = "Harap Diisi & Harus Mengandung kata 	\"Jalan\" Pada Alamat";
+           error = true;
+       }else{
+ 		document.getElementById('addressStatus').innerHTML = " ";
+ 		}
+	
+	var telp=0;
+	for(var i=0;i<phone.length;i++){
+		if(phone.charAt(i)=='0' || phone.charAt(i)=='1' ||phone.charAt(i)=='2' || phone.charAt(i)=='3' || phone.charAt(i)=='4' || phone.charAt(i)=='5' || phone.charAt(i)=='6' || phone.charAt(i)=='7' || phone.charAt(i)=='8' || phone.charAt(i)=='9'){
+			telp ++;
+		}
+	}
+	if(telp == '' || telp!=phone.length){
+		document.getElementById('phoneStatus').innerHTML="harap masukan nomor telepon"; error=true;
+	}
+	else{
+		document.getElementById('phoneStatus').innerHTML="";
+	}
+
+	if(!male && !female){
+		document.getElementById('genderStatus').innerHTML="Harap masukan gender";
+		error=true;
+	}
+	else{
+		document.getElementById('genderStatus').innerHTML="";
+	}
+	if(!error)
+	{
+		alert("Register Berhasil!!");
+	}
+}
+
+</script>
+
+</html>
